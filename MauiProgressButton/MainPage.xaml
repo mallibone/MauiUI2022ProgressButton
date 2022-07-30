@@ -13,7 +13,7 @@
                           WidthRequest="100"/>
             <Button x:Name="ProgressButton"
                     Text=""
-                    FontSize="24"
+                    FontSize="32"
                     FontFamily="fa-regular"
                     HeightRequest="80"
                     WidthRequest="80"

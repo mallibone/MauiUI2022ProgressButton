@@ -6,7 +6,7 @@ public partial class MainPage
 {
     private readonly ProgressArc _progressArc;
     private DateTime _startTime;
-    private readonly int _duration = 60_000;
+    private readonly int _duration = 5;
     private double _progress;
     private CancellationTokenSource _cancellationTokenSource = new();
 
@@ -42,21 +42,21 @@ public partial class MainPage
     {
         while (!_cancellationTokenSource.Token.IsCancellationRequested)
         {
-            var elapsedTime = (DateTime.Now - _startTime);
-            int secondsRemaining = (int) (_duration - elapsedTime.TotalMilliseconds)/1000;
+            TimeSpan elapsedTime = DateTime.Now - _startTime;
+            int secondsRemaining = (int) (_duration - elapsedTime.TotalSeconds);
+
+            ProgressButton.Text = $"{secondsRemaining}";
+
+            _progress = Math.Ceiling(elapsedTime.TotalSeconds);
+            _progress %= _duration;
+            _progressArc.Progress = _progress / _duration;
+            ProgressView.Invalidate();
 
             if (secondsRemaining == 0)
             {
                 _cancellationTokenSource.Cancel();
-                continue;
+                return;
             }
-
-            ProgressButton.Text = $"{secondsRemaining}";
-
-            _progress = elapsedTime.TotalMilliseconds;
-            _progress %= _duration;
-            _progressArc.Progress = _progress / (float)_duration;
-            ProgressView.Invalidate();
             
             await Task.Delay(500);
         }
@@ -67,7 +67,7 @@ public partial class MainPage
     private void ResetView()
     {
         _progress = 0;
-        _progressArc.Progress = 0;
+        _progressArc.Progress = 100;
         ProgressView.Invalidate();
         ProgressButton.Text = "\uf144";
     }
