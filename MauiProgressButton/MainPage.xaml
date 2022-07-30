@@ -1,0 +1,31 @@
+﻿<?xml version = "1.0" encoding = "utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiProgressButton.MainPage"
+             Background="{StaticResource Primary}">
+
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Grid>
+            <GraphicsView x:Name="ProgressView"
+                          BackgroundColor="{StaticResource Primary}"
+                          HeightRequest="100"
+                          WidthRequest="100"/>
+            <Button x:Name="ProgressButton"
+                    Text=""
+                    FontSize="24"
+                    FontFamily="fa-regular"
+                    HeightRequest="80"
+                    WidthRequest="80"
+                    CornerRadius="40"
+                    HorizontalOptions="Center"
+                    Clicked="StartButton_OnClicked"
+                    BorderWidth="0"
+                    BackgroundColor="{StaticResource Primary}"/>
+        </Grid>
+        <Button x:Name="ResetButton"
+                Text="Reset"
+                Clicked="ResetButton_OnClicked"
+                TextColor="WhiteSmoke"/>
+    </VerticalStackLayout>
+</ContentPage>
