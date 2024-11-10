@@ -55,7 +55,6 @@ public partial class MainPage
             if (secondsRemaining == 0)
             {
                 _cancellationTokenSource.Cancel();
-                return;
             }
             
             await Task.Delay(500);
@@ -81,7 +80,6 @@ public class ProgressArc : IDrawable
         // Angle of the arc in degrees
         var endAngle = 90 - (int)Math.Round(Progress * 360, MidpointRounding.AwayFromZero);
         // Drawing code goes here
-        // canvas.StrokeColor = Color.FromRgba("6599ff");
         canvas.StrokeColor = Color.FromRgba("6599ff");
         canvas.StrokeSize = 4;
         Debug.WriteLine($"The rect width is {dirtyRect.Width} and height is {dirtyRect.Height}");
